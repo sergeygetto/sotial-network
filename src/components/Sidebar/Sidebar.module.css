@@ -1,0 +1,19 @@
+.sidebar{
+    grid-area: sidebar;
+    background: rgb(204, 91, 233);
+  }
+  .item{
+    list-style: none;
+    padding: 10px;
+  }
+  .item a{
+    font-size: 20px;
+    text-decoration: none;
+    /* padding: 10px; */
+
+}  
+.active{
+  color: aqua;
+  padding: 10px;
+
+}

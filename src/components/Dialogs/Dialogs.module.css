@@ -1,0 +1,24 @@
+.dialogs{
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+}
+.elem{
+    font-size: 21px;
+    color: gray;
+    padding: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* margin-bottom: 10px; */
+}
+.elem a{
+    text-decoration: none;
+
+}
+.active{
+  color: aqua;
+  
+}
+.avatar{
+    width: 50px;
+    border-radius: 25px;
+    padding-top: 15px;
+}

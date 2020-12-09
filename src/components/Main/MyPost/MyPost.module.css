@@ -1,0 +1,15 @@
+.post{
+    width: 600px;
+    height: 50px;
+    background: rgb(204, 198, 198);
+    border: none;
+    margin-bottom: 15px;
+    margin: 15px;
+}
+.button{
+    padding: 10px;
+    margin: 15px;
+}
+textarea{
+    font-size: 20px;
+}
