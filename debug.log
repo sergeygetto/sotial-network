@@ -18,3 +18,4 @@
 [1208/230618.952:ERROR:exception_snapshot_win.cc(99)] thread ID 4324 not found in process
 [1208/230618.952:ERROR:exception_snapshot_win.cc(99)] thread ID 11060 not found in process
 [1209/122450.265:ERROR:directory_reader_win.cc(43)] FindFirstFile: Системе не удается найти указанный путь. (0x3)
+[1211/090559.145:ERROR:directory_reader_win.cc(43)] FindFirstFile: Системе не удается найти указанный путь. (0x3)

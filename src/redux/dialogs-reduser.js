@@ -1,7 +1,38 @@
 const CHANGE_NEW_MESSAGES_TEXT = "CHANGE-NEW-MESSAGES-TEXT";
 const SEND_NEW_MESSAGES = "SEND-NEW-MESSAGES";
 
-export const dialogsReduser = (state, action) => {
+
+const initialState = {
+  messages: [
+    { id: 1, messages: "React" },
+    { id: 2, messages: "YO" },
+    { id: 3, messages: "React Js" },
+  ],
+  dialogs: [
+    {
+      id: 1,
+      name: "Serg",
+      img: "https://instaturbo.ru/images/blog/5bbe5b813ffd5.jpg",
+    },
+    {
+      id: 2,
+      name: "Cat",
+      img: "https://instaturbo.ru/images/blog/5bbe5b813ffd5.jpg",
+    },
+    {
+      id: 3,
+      name: "Alex",
+      img: "https://instaturbo.ru/images/blog/5bbe5b813ffd5.jpg",
+    },
+    // {id: 4, name: 'Ivan' ,img: 'https://instaturbo.ru/images/blog/5bbe5b813ffd5.jpg'},
+    // {id: 5, name: 'Sveta' ,img: 'https://instaturbo.ru/images/blog/5bbe5b813ffd5.jpg'},
+    // {id: 6, name: 'Jack' ,img: 'https://instaturbo.ru/images/blog/5bbe5b813ffd5.jpg'}
+  ],
+  initialMessagesText: "53",
+}
+
+
+export const dialogsReduser = (state = initialState, action) => {
   switch(action.type) {
     case CHANGE_NEW_MESSAGES_TEXT:
     state.initialMessagesText = action.body;

@@ -1,7 +1,17 @@
 const NEW_POST = "NEW-POST";
 const CHANGE_TEXT = "CHANGE-TEXT";
 
-export const mainReduser = (state, action) => {
+
+const initialState = {
+ posts: [
+        { id: 1, messages: "My first post", like: "37" },
+        { id: 1, messages: "Hi, my name is Serg", like: "27" },
+        { id: 1, messages: "REACT JS", like: "17" },
+      ],
+      initialText: "what?"
+    }
+
+export const mainReduser = (state = initialState, action) => {
   switch (action.type) {
     case NEW_POST:
       let postAdd = {

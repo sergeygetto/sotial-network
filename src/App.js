@@ -3,11 +3,13 @@ import './App.css';
 import Header from './components/Header/Header';
 import Main from './components/Main/Main';
 import Sidebar from './components/Sidebar/Sidebar';
-import Dialogs from './components/Dialogs/Dialogs';
+// import Dialogs from './components/Dialogs/Dialogs';
 import { BrowserRouter, Route } from 'react-router-dom';
-import store from './redux/state';
+import DialogsContainer from './components/Dialogs/DialogsContainer';
+
 
 const App = (props) => {
+
   return (
   <BrowserRouter>
      <div className="container">
@@ -15,11 +17,9 @@ const App = (props) => {
        <Sidebar />
        <div className='container-app-wrapper'>
           <Route path='/main' render = { ()=>
-             <Main state={props.state.mainPage} dispatch={props.dispatch} />}  />
+             <Main  />}  />
           <Route path='/dialogs' render = { ()=> 
-          <Dialogs messages={props.state.dialogsPage.messages}
-           dialogs={props.state.dialogsPage.dialogs} dispatch={props.dispatch} 
-      initialMessagesText = {store._state.dialogsPage.initialMessagesText}/>}/>
+          <DialogsContainer  />}/>
       
        </div>
      </div>
@@ -28,3 +28,5 @@ const App = (props) => {
 }
 
 export default App;
+
+// state={props.state.mainPage} dispatch={props.dispatch}  store={props.store}

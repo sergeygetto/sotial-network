@@ -40,6 +40,7 @@ export let store = {
       initialMessagesText: "",
     },
   },
+
   getState() {
     return this._state;
   },
