@@ -1,7 +1,6 @@
 const NEW_POST = "NEW-POST";
 const CHANGE_TEXT = "CHANGE-TEXT";
 
-
 const initialState = {
  posts: [
         { id: 1, messages: "My first post", like: "37" },
@@ -14,18 +13,16 @@ const initialState = {
 export const mainReduser = (state = initialState, action) => {
   switch (action.type) {
     case NEW_POST:
-      let postAdd = {
-        id: 4,
-        messages: state.initialText,
-        like: "51",
-      };
-      state.posts.unshift(postAdd);
-      state.initialText = "";
-      return state;
-
+    return {
+      ...state, 
+      initialText : "",
+      posts: [{id: 4,messages: state.initialText,like: "51"}, ...state.posts ]
+    }
     case CHANGE_TEXT:
-      state.initialText = action.update;
-      return state;
+    return {
+      ...state,
+      initialText : action.update
+    }
     default:
       return state;
   }

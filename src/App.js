@@ -1,9 +1,8 @@
-
 import './App.css';
 import Header from './components/Header/Header';
 import Main from './components/Main/Main';
 import Sidebar from './components/Sidebar/Sidebar';
-// import Dialogs from './components/Dialogs/Dialogs';
+import UsersContainer from './components/Users/UsersContainer'
 import { BrowserRouter, Route } from 'react-router-dom';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 
@@ -20,6 +19,9 @@ const App = (props) => {
              <Main  />}  />
           <Route path='/dialogs' render = { ()=> 
           <DialogsContainer  />}/>
+      
+            <Route path='/users' render = { ()=> 
+          <UsersContainer  />}/> 
       
        </div>
      </div>

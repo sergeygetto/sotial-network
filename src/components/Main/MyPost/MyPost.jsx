@@ -8,12 +8,11 @@ let myPost = props.posts.map(m => <Post  messages = {m.messages} like = {m.like}
 let newPost = React.createRef();
 
 let onAddPost = () =>{
-  props.NewPOST();
-  
+  props.NewPOST() 
 }
 let onUpdateText = () => {
 let text =  newPost.current.value
-    props.ChangeTEXT(text);
+props.ChangeTEXT(text)
 }
 
 return( <>
@@ -23,7 +22,6 @@ return( <>
      </div>
     </div>
     { myPost }
-    
     </>
 )
 }

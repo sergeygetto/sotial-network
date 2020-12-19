@@ -4,24 +4,19 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import store from "./redux/redux-store";
-import StoreContext from './context'
+import { Provider } from 'react-redux'
 
-let rerenderTree = () => {
   ReactDOM.render(
     <React.StrictMode>
-      <StoreContext.Provider value={store}>
+      <Provider store={store}>
       <App  store={store} />
-      </StoreContext.Provider>
+      </Provider>
     </React.StrictMode>,
     document.getElementById("root")
   );
   reportWebVitals();
-};
-rerenderTree(store.getState());
 
-store.subscribe(() =>{
- let state = store.getState()
-  rerenderTree(state)})
+
 
   // dispatch={store.dispatch.bind(store)}
   // state={state}

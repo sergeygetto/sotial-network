@@ -1,0 +1,35 @@
+.avatar img{
+    padding: 10px;
+    width: 90px;
+    height: 90px;
+}
+.container{
+display: flex;
+justify-content: space-around;
+}
+.description{
+    width: 600px;
+    border: 3px solid rgb(58, 55, 55);
+    border-radius: 30px;
+    margin: 10px;
+    background: gray;
+
+}
+.btnFollow{
+    padding: 10px;
+    margin-left: 10px;
+    font-size: 12px;
+    width: 90px;
+}
+.active {
+    font-weight: bold;
+    
+}
+.number{
+    max-width: 1000px;
+
+}
+.line{
+    display: inline;
+    max-width: 700px;
+}
