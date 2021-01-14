@@ -6,11 +6,11 @@ import MyPostContainer from './MyPost/MyPostContainer'
 const Main =(props)=>{
 return ( <> 
 
-<article> 
-    <Description />
-    
+<article>
 
+    <Description profile = {props.profile}/>
     <MyPostContainer   />
+
      </article>
 </>
 )

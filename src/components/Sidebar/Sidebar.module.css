@@ -5,11 +5,13 @@
   .item{
     list-style: none;
     padding: 10px;
+    cursor: pointer
   }
   .item a{
     font-size: 20px;
     text-decoration: none;
     /* padding: 10px; */
+   ;
 
 }  
 .active{

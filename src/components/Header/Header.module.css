@@ -8,3 +8,13 @@
     padding: 10px;
   }
   
+  .auth{
+    float: right;
+    padding: 13px;
+    cursor: pointer;
+  }
+  .auth a{
+    color: white;
+    font-size: 20px;
+
+  }

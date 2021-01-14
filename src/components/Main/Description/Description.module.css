@@ -6,3 +6,17 @@
   .description{
       padding: 15px;
   }
+  .about span , .contactsSpan , .job{
+    font-size: 25px;
+  }
+  
+
+  .job img{
+      width: 150px;
+      height: 100px;
+  }
+  .name{
+      font-weight: bold;
+      font-size: 25px;
+  }
+  
