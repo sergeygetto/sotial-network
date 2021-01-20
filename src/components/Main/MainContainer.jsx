@@ -1,47 +1,53 @@
-import *as axios from 'axios'
+
 import React from 'react'
 import { connect } from 'react-redux'
 import Main from './Main'
-import { setUsersProfile } from './../../redux/main-reduser'
+import { userProfileThunkCreator, updateUserStatusThunkCreator, getUserStatusThunkCreator } from './../../redux/main-reduser'
 import { withRouter } from 'react-router-dom'
-import { getMainProfile } from '../../api/api'
+import { withAuthRedirect } from '../../hoc/WithAuthRedirect'
+import { compose } from 'redux'
+// import { getMainProfile } from '../../api/api'
 
 class MainContainer extends React.Component {
+    debbuger;
 
 componentDidMount() {
-    // debugger
     let userID = this.props.match.params.userID
     if (!userID){
-     userID = 2
-    }  
-    let u = `${userID}`
-    getMainProfile(u)
-    .then(data => {
-      this.props.setUsersProfile(data)
-})
+             userID = 13348
+            }  
+    this.props.userProfileThunkCreator(userID)
+    this.props.getUserStatusThunkCreator(userID)
+ 
+
 }
 
-render() {    
+
+render() { 
+
+    
 return ( <> 
 
 <article>
      
-<Main {...this.props} profile ={this.props.profile}/>
+<Main {...this.props} profile ={this.props.profile} status={this.props.status} 
+updateUserStatusThunkCreator={this.props.updateUserStatusThunkCreator} />
 
      </article>
 </>
 )
 }
 }
+
 const mapStateToProps = (state) => {
     return{
-    profile: state.mainPage.profile
+    profile: state.mainPage.profile,
+    status: state.mainPage.status,
     }
 }
-let WithUserContainerComponent = withRouter(MainContainer)
-
-export default connect(mapStateToProps, {setUsersProfile})(WithUserContainerComponent)
-
- 
-
-// posts={props.state.posts} dispatch={props.dispatch} initialText={props.state.initialText}  store={props.store} 
+export default compose(
+    connect(mapStateToProps, { userProfileThunkCreator, updateUserStatusThunkCreator , getUserStatusThunkCreator}),
+    withRouter,
+    
+)(MainContainer)
+// withAuthRedirect

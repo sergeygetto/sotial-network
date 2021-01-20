@@ -1,6 +1,10 @@
+import { getMainProfile , getUsersStatus , updateUsersStatus} from '../api/api'
+
+
 const NEW_POST = "NEW-POST";
 const CHANGE_TEXT = "CHANGE-TEXT";
 const SET_USERS_PROFILE = "SET-USERS-PROFILE";
+const SET_USERS_STATUS = "SET-USERS-STATUS";
 
 
 const initialState = {
@@ -10,7 +14,8 @@ const initialState = {
         { id: 1, messages: "REACT JS", like: "17" },
       ],
       initialText: "what?",
-      profile: null
+      profile: null,
+      status: ""
     }
 
 export const mainReduser = (state = initialState, action) => {
@@ -31,6 +36,11 @@ export const mainReduser = (state = initialState, action) => {
       ...state,
       profile : action.profile
     }
+    case SET_USERS_STATUS:
+    return {
+      ...state,
+      status : action.status
+    }
 
     default:
       return state;
@@ -43,5 +53,39 @@ export const ChangeTEXT = (text) => ({ type: CHANGE_TEXT, update: text });
 
 export const setUsersProfile = (profile) => ({ type: SET_USERS_PROFILE, profile });
 
+export const setUsersStatus = (status) => ({ type: SET_USERS_STATUS, status });
+
+
+export const userProfileThunkCreator = (userID) => {
+  return (dispatch) => {  
+        let u = `${userID}`
+        getMainProfile(u)
+        .then(data => {
+          
+          dispatch(setUsersProfile(data))
+    })
+  }
+} 
+export const getUserStatusThunkCreator = (userID) => {
+  return (dispatch) => {  
+    getUsersStatus(userID)
+        .then(data => {
+          // debugger;
+          dispatch(setUsersStatus(data.data))
+    })
+  }
+} 
+
+export const updateUserStatusThunkCreator = (status) => {
+  
+  return (dispatch) => { 
+     
+    updateUsersStatus(status)
+        .then(data => {
+          if(data.data.resultCode === 0){
+            dispatch(setUsersStatus(status))}
+    })
+  }
+} 
 
 export default mainReduser;

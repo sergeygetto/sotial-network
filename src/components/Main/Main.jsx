@@ -4,11 +4,11 @@ import MyPostContainer from './MyPost/MyPostContainer'
 
 
 const Main =(props)=>{
+
 return ( <> 
 
 <article>
-
-    <Description profile = {props.profile}/>
+    <Description profile = {props.profile} status={props.status} updateUserStatusThunkCreator={props.updateUserStatusThunkCreator}/>
     <MyPostContainer   />
 
      </article>

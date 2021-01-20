@@ -1,18 +1,22 @@
 import { connect } from "react-redux";
+import { compose } from "redux";
+import { withAuthRedirect } from "../../hoc/WithAuthRedirect";
 import {
   changeNewMessagesText,
   sendNewMessages,
 } from "../../redux/dialogs-reduser";
 import Dialogs from "./Dialogs";
+
 const mapStateToProps = (state)  => {
   return {
     dialogs : state.dialogsPage.dialogs,
     messages : state.dialogsPage.messages,
-    initialMessagesText : state.dialogsPage.initialMessagesText
-    // dialogsPage: state.dialogsPage
+    initialMessagesText : state.dialogsPage.initialMessagesText,
+    
   }
 }
 const mapDispatchToProps = (dispatch) => {
+
   return {
     changeNewMessagesText : (body) => { 
     let action = changeNewMessagesText(body)
@@ -21,11 +25,11 @@ const mapDispatchToProps = (dispatch) => {
 
   }
 }
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
 
-export default DialogsContainer;
-
-
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withAuthRedirect
+)(Dialogs)
 
 
 // const DialogsContainer = () => {

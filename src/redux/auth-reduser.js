@@ -1,3 +1,6 @@
+ import { getHeader } from '../api/api';
+
+
 const AUTH_USERS_DATA = "AUTH-USERS-COMPONENT";
 
 
@@ -25,5 +28,15 @@ export const authReduser = (state = initialState, action) => {
 
 export const authUsersData = (id , email , login) => ({ type: AUTH_USERS_DATA, data: {id , email , login} });
 
+export const authUserThunkCreator = () => {
+  return (dispatch) => {
+    getHeader()
+    .then(data => {
+      if(data.resultCode === 0){
+        let {id , email , login} = data.data
+      dispatch(authUsersData(id , email , login))
+    }})
+  }
+}
 
 export default authReduser;

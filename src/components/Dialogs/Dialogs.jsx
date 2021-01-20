@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 import DialogElem from "./DialogElem/DialogElem";
 import el from "./Dialogs.module.css";
 import MessagesElem from "./MessagesElem/MessagesElem";
@@ -19,6 +20,7 @@ const Dialogs = (props) => {
   let onSendNewMESSAGES = () => {
     props.sendNewMessages();
   };
+
 
   return (
     <>

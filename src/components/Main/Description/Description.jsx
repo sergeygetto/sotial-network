@@ -4,7 +4,7 @@ import el from './Description.module.css'
 import yes from './../../../assets/images/yes.jpg'
 import no from './../../../assets/images/no.jpg'
 import avatar from './../../../assets/images/avatar.jpg'
-
+import DescriptionStatus from './DescriptionStatus'
 
 const Description =(props) => {
 
@@ -17,7 +17,8 @@ return(<>
     <header> <img src='https://interier-foto.ru/wp-content/uploads/dlinnye-foto-4.jpg'></img></header>  
     
     <div className={el.description}>
-    {props.profile.photos.large == null ? <img src={avatar} /> :  <img src={props.profile.photos.large} />}  
+    {props.profile.photos.large == null ? <img src={avatar} /> :  <img src={props.profile.photos.large} />} 
+    <DescriptionStatus status={props.status} updateUserStatusThunkCreator={props.updateUserStatusThunkCreator} /> 
     <div className={el.name}> {props.profile.fullName} </div>
     <div className={el.about}>
        <span> aboutMe: </span> <br/>

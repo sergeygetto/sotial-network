@@ -91,15 +91,17 @@ return (dispatch) => {
     dispatch(toggleIsFetching(false)) 
     dispatch(setUsers(data.items))
     dispatch(setUsersTotalCount(data.totalCount))
-    })
+    // setCurrent(p) 
+  })
+    
     setCurrent(p)
-    dispatch(toggleIsFetching(true))
+    // dispatch(toggleIsFetching(true))
 
-    getUserPageChange(p , pageSize).then(data => {
-      dispatch(toggleIsFetching(false))
+    // getUserPageChange(p , pageSize).then(data => {
+    //   dispatch(toggleIsFetching(false))
 
-      dispatch(setUsers(data.items))
-      })
+    //   dispatch(setUsers(data.items))
+    //   })
       
 }}
 export const unFollowThunkCreator = (userId) => {

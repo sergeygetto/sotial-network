@@ -1,19 +1,19 @@
 import React from 'react'
 import Header from './Header';
-import *as axios from 'axios';
 import { connect } from 'react-redux';
-import { authUsersData } from '../../redux/auth-reduser'
-import { getHeader } from '../../api/api';
+import {  authUserThunkCreator } from '../../redux/auth-reduser'
+// import { getHeader } from '../../api/api';
  
 class HeaderContainer extends React.Component {
   componentDidMount (){
+    this.props.authUserThunkCreator()
     // debugger;
-    getHeader()
-    .then(data => {
-      if(data.resultCode === 0){
-        let {id , email , login} = data.data
-      this.props.authUsersData(id , email , login)
-    }})
+    // getHeader()
+    // .then(data => {
+    //   if(data.resultCode === 0){
+    //     let {id , email , login} = data.data
+    //   this.props.authUsersData(id , email , login)
+    // }})
   } 
 
   render(){
@@ -31,4 +31,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps , {authUsersData})(HeaderContainer)
+export default connect(mapStateToProps , {authUserThunkCreator})(HeaderContainer)
