@@ -14,7 +14,10 @@ class MainContainer extends React.Component {
 componentDidMount() {
     let userID = this.props.match.params.userID
     if (!userID){
-             userID = 13348
+             userID = this.props.autorizedId
+             if (!userID){
+                 this.props.histopy.push('/login')
+             }
             }  
     this.props.userProfileThunkCreator(userID)
     this.props.getUserStatusThunkCreator(userID)
@@ -43,11 +46,13 @@ const mapStateToProps = (state) => {
     return{
     profile: state.mainPage.profile,
     status: state.mainPage.status,
+    autorizedId: state.auth.id
     }
 }
 export default compose(
     connect(mapStateToProps, { userProfileThunkCreator, updateUserStatusThunkCreator , getUserStatusThunkCreator}),
     withRouter,
+    withAuthRedirect
     
 )(MainContainer)
 // withAuthRedirect

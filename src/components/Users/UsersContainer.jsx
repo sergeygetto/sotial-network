@@ -3,8 +3,8 @@ import {follow, unFollow, setUsers, setCurrent, setUsersTotalCount, toggleIsFetc
 import Users from './Users'
 import React from 'react'
 import Loading from "../common/loading/Loading";
-// import { getUserPage } from './../../api/api'
-// import { getUserPageChange } from './../../api/api'
+import { getUsers,getPageSize,getTotalPage,getCurrentPage,getIsFetching, getFollowingProgress} from "../../redux/users-selectors";
+
 
 
 class UsersAPI extends React.Component  {
@@ -42,10 +42,7 @@ render () {
   currentPage={this.props.currentPage}
   onPageChanged={this.onPageChanged}
   users={this.props.users}
-  // follow={this.props.follow}
-  // unFollow={this.props.unFollow}
   followingProgress={this.props.followingProgress}
-  // toggleIsFollowingProgress={this.props.toggleIsFollowingProgress }
   followThunkCreator={this.props.followThunkCreator}
   unFollowThunkCreator={this.props.unFollowThunkCreator}
   />
@@ -57,12 +54,12 @@ render () {
 const mapStateToProps = (state)  => {
 
     return {
-    users : state.usersPage.users,
-    pageSize: state.usersPage.pageSize,
-    totalPage: state.usersPage.totalPage,
-    currentPage: state.usersPage.currentPage,
-    isFetching: state.usersPage.isFetching,
-    followingProgress: state.usersPage.followingProgress
+    users : getUsers(state),
+    pageSize: getPageSize(state),
+    totalPage: getTotalPage(state),
+    currentPage: getCurrentPage(state),
+    isFetching: getIsFetching(state),
+    followingProgress: getFollowingProgress(state)
   }
 }
 

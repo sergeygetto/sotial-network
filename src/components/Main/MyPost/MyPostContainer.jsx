@@ -1,18 +1,15 @@
 import { connect } from "react-redux";
-import { NewPOST, ChangeTEXT } from "../../../redux/main-reduser";
+import { NewPOST } from "../../../redux/main-reduser";
 import MyPost from "./MyPost";
 const mapStateToProps = (state) => {
   return {
   posts: state.mainPage.posts,
-  initialText: state.mainPage.initialText
+
   }
 }
 const mapDispatchToProps = (dispatch) => {
   return{
-NewPOST : () => dispatch(NewPOST()),
-ChangeTEXT : (text) => {
-      let action = ChangeTEXT(text);
-      dispatch(action)}
+NewPOST : (addMyPost) => dispatch(NewPOST(addMyPost)),
 }
 }
 const MyPostContainer = connect(mapStateToProps, mapDispatchToProps)(MyPost)

@@ -2,8 +2,7 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import { withAuthRedirect } from "../../hoc/WithAuthRedirect";
 import {
-  changeNewMessagesText,
-  sendNewMessages,
+  sendNewMessages
 } from "../../redux/dialogs-reduser";
 import Dialogs from "./Dialogs";
 
@@ -18,10 +17,8 @@ const mapStateToProps = (state)  => {
 const mapDispatchToProps = (dispatch) => {
 
   return {
-    changeNewMessagesText : (body) => { 
-    let action = changeNewMessagesText(body)
-    dispatch(action)},
-    sendNewMessages : () => dispatch(sendNewMessages())
+  
+    sendNewMessages : (newMessagesBody) => dispatch(sendNewMessages(newMessagesBody))
 
   }
 }

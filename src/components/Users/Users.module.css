@@ -13,7 +13,9 @@ justify-content: space-around;
     border-radius: 30px;
     margin: 10px;
     background: gray;
-
+    padding: 20px;
+    height: 50px;
+    margin-top: 30px;
 }
 .btnFollow{
     padding: 10px;
@@ -23,13 +25,19 @@ justify-content: space-around;
 }
 .active {
     font-weight: bold;
-    
+    font-size: 25px;
 }
 .number{
     max-width: 1000px;
-
+    margin-left: 100px;
+    margin-top: 10px;
 }
-.line{
+.number .line span{
+    cursor: pointer;
+border: 1px solid black;
+padding: 5px;
+}
+.line{  
     display: inline;
     max-width: 700px;
 }

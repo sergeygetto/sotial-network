@@ -1,0 +1,22 @@
+
+.formControl.error textarea {
+    border: 1px solid red
+}
+.formControl.error span {
+    color: red;
+    font-size: 20px;
+    padding-left: 25px;
+}
+
+textarea:focus, input:focus{
+    outline: none;
+    }
+.authError{
+    color: red;
+    font-size: 20px;
+    padding: 10px;
+}    
+.loginForm {
+    margin: 50px 50px;
+ 
+}

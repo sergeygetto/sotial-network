@@ -1,3 +1,4 @@
+import React from 'react'
 import './App.css';
 import Sidebar from './components/Sidebar/Sidebar';
 import UsersContainer from './components/Users/UsersContainer'
@@ -6,9 +7,19 @@ import DialogsContainer from './components/Dialogs/DialogsContainer';
 import MainContainer from './components/Main/MainContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import Login from './components/Login/Login';
+import { connect } from 'react-redux';
+import {initializationUserThunkCreator} from './redux/app-reduser'
+import { compose } from 'redux';
+import Loading from './components/common/loading/Loading'
 
+class App extends React.Component {
+  componentDidMount (){
+    this.props.initializationUserThunkCreator()
+  }
 
-const App = (props) => {
+render(){
+// debugger;
+if(!this.props.initialization)return <Loading />
 
   return (
   <BrowserRouter>
@@ -32,7 +43,11 @@ const App = (props) => {
      </BrowserRouter>
   );
 }
+}
+const mapStateToProps = (state) => ({
+initialization: state.app.initialization
+})
+export default compose(
+  connect(mapStateToProps, {initializationUserThunkCreator}))(App);
 
-export default App;
-
-// state={props.state.mainPage} dispatch={props.dispatch}  store={props.store}
+// state={props.state.mainPage} dispatch={props.dispatch}  store={props.store} 

@@ -4,7 +4,8 @@ import el from './Description.module.css'
 import yes from './../../../assets/images/yes.jpg'
 import no from './../../../assets/images/no.jpg'
 import avatar from './../../../assets/images/avatar.jpg'
-import DescriptionStatus from './DescriptionStatus'
+// import DescriptionStatus from './DescriptionStatus'
+import DescriptionStatusHooks from './DescriptionStatusHooks'
 
 const Description =(props) => {
 
@@ -18,7 +19,7 @@ return(<>
     
     <div className={el.description}>
     {props.profile.photos.large == null ? <img src={avatar} /> :  <img src={props.profile.photos.large} />} 
-    <DescriptionStatus status={props.status} updateUserStatusThunkCreator={props.updateUserStatusThunkCreator} /> 
+    <DescriptionStatusHooks status={props.status} updateUserStatusThunkCreator={props.updateUserStatusThunkCreator} /> 
     <div className={el.name}> {props.profile.fullName} </div>
     <div className={el.about}>
        <span> aboutMe: </span> <br/>
@@ -32,7 +33,7 @@ return(<>
         <span>{props.profile.contacts.twitter}</span> <br/> 
         <span>{props.profile.contacts.instagram}</span> </div> 
         }
-        
+      
     </div>
     <div className={el.job}>
     lookingForAJob  

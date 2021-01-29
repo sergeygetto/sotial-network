@@ -1,7 +1,8 @@
- import { getHeader } from '../api/api';
+ import { stopSubmit } from 'redux-form';
+import { getHeader , login , logout} from '../api/api';
 
 
-const AUTH_USERS_DATA = "AUTH-USERS-COMPONENT";
+const AUTH_USERS_DATA = "auth/AUTH-USERS-COMPONENT";
 
 
 
@@ -18,7 +19,7 @@ export const authReduser = (state = initialState, action) => {
     return {
       ...state, 
       ...action.data,
-      isAuth: true
+    
     }
     default:
       return state;
@@ -26,16 +27,34 @@ export const authReduser = (state = initialState, action) => {
 };
 
 
-export const authUsersData = (id , email , login) => ({ type: AUTH_USERS_DATA, data: {id , email , login} });
+export const authUsersData = (id , email , login , isAuth) => ({ type: AUTH_USERS_DATA, data: {id , email , login , isAuth} });
 
 export const authUserThunkCreator = () => {
-  return (dispatch) => {
-    getHeader()
-    .then(data => {
-      if(data.resultCode === 0){
-        let {id , email , login} = data.data
-      dispatch(authUsersData(id , email , login))
-    }})
+  return async(dispatch) => {
+    let response = await getHeader()
+      if(response.data.resultCode === 0){
+        let {id , email , login } = response.data.data
+      dispatch(authUsersData(id , email , login , true))
+    }
+  }
+}  
+export const loginThunkCreator = (email , password, rememberMe) => {
+  return async(dispatch) => {
+    let response = await login(email , password, rememberMe)
+      if(response.data.resultCode === 0){
+      dispatch(authUserThunkCreator())
+      } else { 
+      let messages = response.data.messages.length > 0 ? response.data.messages[0] : "Some error" 
+        dispatch(stopSubmit('login', {_error: messages}))
+    }
+  }
+}
+export const logoutThunkCreator = () => {
+  return async(dispatch) => {
+  let response = await logout()
+      if(response.data.resultCode === 0){
+      dispatch(authUsersData(null , null , null, false ))
+    }
   }
 }
 

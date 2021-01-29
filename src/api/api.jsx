@@ -40,10 +40,7 @@ export const getFollow = (use) => {
 }
 
 export const getHeader = () =>{
-   return instance.get(`auth/me`)
-   .then(response =>{
-     return response.data
-   }) 
+   return instance.get(`auth/me`) 
 }
 export const getMainProfile = (userID) =>{
     // debugger
@@ -57,4 +54,11 @@ export const getUsersStatus = (userID) =>{
 }
 export const updateUsersStatus = (status) =>{
    return instance.put(`profile/status` ,{status: status}) 
+}
+
+export const login = (email, password, rememberMe = false) => {
+    return instance.post(`auth/login`, {email, password, rememberMe})
+}
+export const logout = () => {
+    return instance.delete(`auth/login`)
 }
