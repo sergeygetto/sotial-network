@@ -8,8 +8,9 @@ const Main =(props)=>{
 return ( <> 
 
 <article>
-    <Description profile = {props.profile} status={props.status} updateUserStatusThunkCreator={props.updateUserStatusThunkCreator}/>
-    <MyPostContainer   />
+    <Description profile = {props.profile} status={props.status} updateUserStatusThunkCreator={props.updateUserStatusThunkCreator} savePhotosThunkCreator={props.savePhotosThunkCreator} isOwner={props.isOwner} 
+    profileDescriptionThunkCreator={props.profileDescriptionThunkCreator} />
+    <MyPostContainer/>
 
      </article>
 </>

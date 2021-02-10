@@ -9,11 +9,11 @@ import { maxFieldLengthCreator, requiredFieldValidationForm } from "../../utilit
 
 const Dialogs = (props) => {
   let dialogsItem = props.dialogs.map((elem) => (
-    <DialogElem name={elem.name} id={elem.id} img={elem.img} />
+    <DialogElem key={elem.id} name={elem.name} id={elem.id} img={elem.img} />
   ));
 
   let messagesItem = props.messages.map((elem) => (
-    <MessagesElem messages={elem.messages} />
+    <MessagesElem key={elem.id} messages={elem.messages} />
   ));
 
   const onSubmitAddMessages = (values) =>{

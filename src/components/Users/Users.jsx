@@ -6,19 +6,6 @@ import Paginator from '../common/Paginator/Paginator';
 
 const User = (props) =>{
     
-// let countPage = Math.ceil( props.totalPage / props.pageSize );
-//     let pages = [];
-//     for( let i = 1; i <= countPage; i++){
-//      pages.push(i) 
-//     }
-//     return <>
-//     <div className={el.number}>
-//     {pages.map(p =>{
-//         return(
-//             <div className={el.line}> <span className = {props.currentPage === p && el.active  }
-//         onClick = { ()=> {props.onPageChanged(p)} }>{p}</span>  </div>
-//     )})}
-//     </div>
 return ( <>
 <Paginator totalPage={props.totalPage} pageSize={props.pageSize} currentPage={props.currentPage} onPageChanged={props.onPageChanged} />
 

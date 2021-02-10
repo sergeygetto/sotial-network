@@ -6,7 +6,7 @@ import el from './MyPost.module.css'
 import Post from './Post/Post'
   
 const MyPost = React.memo (props =>{
-let myPost = props.posts.map(m => <Post  messages = {m.messages} like = {m.like} /> )
+let myPost = props.posts.map(m => <Post key={m.like}  messages = {m.messages} like = {m.like} /> )
 
 const onSubmitNewPost = (values) =>{
   props.NewPOST(values.addMyPost) 
@@ -14,7 +14,7 @@ const onSubmitNewPost = (values) =>{
 return( <>
 <div> My post
   
-    <AddMyPostForm onSubmit={onSubmitNewPost} />
+    <AddMyPostReduxForm onSubmit={onSubmitNewPost} />
     </div>
     { myPost }
     </>
@@ -27,14 +27,13 @@ const MyPostForm =  (props) => {
 return(
 <form onSubmit={props.handleSubmit}>
 <div>
-  <Field component={Textarea } name={'addMyPost'} placeholder={'What?'}   validate={[requiredFieldValidationForm, maxLength12 ]}  className={el.post} /> <br />
-     <button className={el.button} >Write post </button>
-     </div>
+  <Field placeholder={'What?'} name={'addMyPost'}  component={Textarea}  validate={[requiredFieldValidationForm, maxLength12 ]}  className={el.post} /> </div>
+  <button className={el.button} >Write post </button>
 </form>
 
 )
 }
-const AddMyPostForm = reduxForm({
+const AddMyPostReduxForm = reduxForm({
   form: "addNewMyPost"
 })(MyPostForm)
 

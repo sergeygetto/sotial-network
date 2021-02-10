@@ -11,7 +11,9 @@ const logoutAuth = () => {
   props.logoutThunkCreator()
 }
 
-    return <header className={el.header}>
+    return <>
+    
+    <header className={el.header}>
          <img src={logo}></img>
 
          <div className={el.auth}>
@@ -19,7 +21,7 @@ const logoutAuth = () => {
            
            </div>  
        </header>
-       
+       </>
 }
 
 
