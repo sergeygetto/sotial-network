@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import el from './Description.module.css'
 
 const DescriptionStatusHooks = (props) =>  {
 
@@ -21,7 +22,7 @@ const DescriptionStatusHooks = (props) =>  {
     props.updateUserStatusThunkCreator(status)
    }
     return( <>
-    <div>
+    <div className={el.statusText}>
          {!editStatus &&
       <div>
           <span  onDoubleClick={onEditStatus}>  {props.status || 'no status' } </span>

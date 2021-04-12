@@ -5,8 +5,15 @@ import { captchaUrlSecurity, getHeader , login , logout } from '../api/api';
 const AUTH_USERS_DATA = "auth/AUTH-USERS-COMPONENT";
 const SET_CAPTCHA_URL = "auth/SET-CAPTCHA-URL"
 
+export type InitialStateType ={
+   id: number | null,
+   email: string | null,
+   login: string | null,
+   isAuth: boolean | false,
+   captchaUrl: string | null
+}
 
-const initialState = {
+const initialState: InitialStateType = {
 id: null,
 email: null,
 login: null,
@@ -14,7 +21,7 @@ isAuth: false,
 captchaUrl: null
     }
 
-export const authReduser = (state = initialState, action) => {
+export const authReduser = (state = initialState, action: any): InitialStateType => {
   switch (action.type) {
     case AUTH_USERS_DATA:
     return {
@@ -32,13 +39,32 @@ export const authReduser = (state = initialState, action) => {
   }
 };
 
+type AuthUsersDataActionDataType = {
+  id: number | null,
+  email: string | null,
+  login: string | null,
+  isAuth: boolean | false
+}
 
-export const authUsersData = (id , email , login , isAuth) => ({ type: AUTH_USERS_DATA, data: {id , email , login , isAuth} });
+type AuthUsersDataActionType = {
+  type: typeof AUTH_USERS_DATA
+  data: AuthUsersDataActionDataType
+ }
 
-export const setCaptchaUrl = (captchaUrl) => ({ type: SET_CAPTCHA_URL, data: {captchaUrl}});
+export const authUsersData = (id: number | null , email: string | null , login: string | null , isAuth: boolean | false):AuthUsersDataActionType =>
+    ({ type: AUTH_USERS_DATA, data: {id , email , login , isAuth} });
+
+
+type SetCaptchaUrlType = {
+  type: typeof SET_CAPTCHA_URL
+  data: { captchaUrl: string }
+}
+
+export const setCaptchaUrl = (captchaUrl: string): SetCaptchaUrlType =>
+    ({ type: SET_CAPTCHA_URL, data: {captchaUrl}});
 
 export const authUserThunkCreator = () => {
-  return async(dispatch) => {
+  return async(dispatch: any) => {
     let response = await getHeader()
       if(response.data.resultCode === 0){
         let {id , email , login } = response.data.data
@@ -46,8 +72,8 @@ export const authUserThunkCreator = () => {
     }
   }
 }  
-export const loginThunkCreator = (email , password, rememberMe, captcha) => {
-  return async(dispatch) => {
+export const loginThunkCreator = (email: string , password: string, rememberMe: boolean, captcha: string ) => {
+  return async(dispatch: any) => {
     let response = await login(email , password, rememberMe, captcha)
       if(response.data.resultCode === 0){
       dispatch(authUserThunkCreator())
@@ -61,7 +87,7 @@ export const loginThunkCreator = (email , password, rememberMe, captcha) => {
   }
 }
 export const captchaUrlThunkCreator = () => {
-  return async(dispatch) => {
+  return async(dispatch: any) => {
   let response = await captchaUrlSecurity();
   const captchaUrl = response.data.url
       dispatch(setCaptchaUrl(captchaUrl))
@@ -70,10 +96,10 @@ export const captchaUrlThunkCreator = () => {
 }
 
 export const logoutThunkCreator = () => {
-  return async(dispatch) => {
+  return async(dispatch: any) => {
   let response = await logout()
       if(response.data.resultCode === 0){
-      dispatch(authUsersData(null , null , null, false ))
+      dispatch(authUsersData (null, null , null, false ))
     }
   }
 }

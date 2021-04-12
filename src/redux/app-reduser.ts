@@ -4,20 +4,21 @@ import {authUserThunkCreator} from './auth-reduser'
 
 const USER_INITIALIZATION = "auth/USER_INITIALIZATION";
 
+export type InitialStateType = {
+initialization: boolean }
 
 
-const initialState = {
-initialization: false,
+const initialState: InitialStateType = {
+initialization: false
+}
 
-    }
 
-export const appReduser = (state = initialState, action: any) => {
+export const appReduser = (state = initialState, action: any):InitialStateType => {
   switch (action.type) {
     case USER_INITIALIZATION:
     return {
       ...state, 
       initialization: true
-    
     }
     default:
       return state;
@@ -25,7 +26,12 @@ export const appReduser = (state = initialState, action: any) => {
 };
 
 
-export const initializationUser = () => ({ type: USER_INITIALIZATION});
+type InitializationUserActionType = {
+    type: typeof USER_INITIALIZATION
+}
+export const initializationUser = (): InitializationUserActionType =>  ({ type : USER_INITIALIZATION});
+
+
 
 export const initializationUserThunkCreator = () => {
   return (dispatch: any) => {

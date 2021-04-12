@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import {follow, unFollow, setUsers, setCurrent, setUsersTotalCount, toggleIsFetching , toggleIsFollowingProgress,getUsersThunkCreator, followThunkCreator , unFollowThunkCreator} from './../../redux/users-reduser'
+import {follow, unFollow, setUsers, setCurrent, setUsersTotalCount, toggleIsFetching , toggleIsFollowingProgress,getUsersThunkCreator, followThunkCreator , unFollowThunkCreator} from '../../redux/users-reduser'
 import Users from './Users'
 import React from 'react'
 import Loading from "../common/loading/Loading";

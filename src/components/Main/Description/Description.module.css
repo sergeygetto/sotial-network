@@ -1,22 +1,108 @@
 .main img{
-    height: 200px;
+    height: 260px;
     /* min-width: 100%; */
+    padding: 20px;
+    /* display: inline-block; */
   }
 
   .description{
       padding: 15px;
   }
-  .about span , .contactsSpan , .job{
+  .about span , .contacts span, .job{
     font-size: 25px;
   }
+  .about {
+      position: relative;
+      bottom: 120px;
+      left: 20px;
+      font-size: 20px;
+  }
   
-
   .job img{
       width: 150px;
       height: 100px;
+      position: relative;
+      top: 50px;
+  }
+  .desJob{
+      display: flex;
+      margin-top: -180px;
+      padding-left: 20px;
+
   }
   .name{
       font-weight: bold;
-      font-size: 25px;
+      font-size: 30px;
+      position: relative;
+      bottom: 400px;
+      left: 450px;
+      font-family: 'Montserrat', sans-serif
   }
+  .contacts{
+    position: relative;
+    bottom: 100px;
+    font-size: 20px;
+    left: 20px;
+  }
+  .status{
+      max-width: 540px;
+      position: relative;
+      left: 300px;
+      bottom: 200px;
+      background: rgb(204, 198, 198);
+      padding: 20px;
+      border-radius: 5px;
+  }
+  .status input {
+      background: rgb(204, 198, 198);
+      padding-left: 10px;
+      min-width: 300px;
+  }
+  .statusText{
+      font-size: 20px;
+      padding-left: 30px;
+      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  }
+  .buttonEdit {
+    text-decoration: none;
+    display: inline-block;
+    padding: 5px 30px;
+    margin: 10px 20px;
+    border-radius: 30px;
+    background-image: linear-gradient(45deg, #6ab1d7 0%, #33d9de 50%, #002878 100%);
+    background-position: 100% 0;
+    background-size: 200% 200%;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+    color: white;
+    box-shadow: 0 16px 32px 0 rgba(0, 40, 120, .35);
+    transition: .5s;
+    position: relative;
+    bottom: 180px;
+    left: 290px;
+  }
+  .buttonEdit:hover {
+    box-shadow: 0 0 0 0 rgba(0, 40, 120, 0);
+    background-position: 0 0;
+  }
+  .inputFile{
+      width:300px;
+    position: relative;
+    bottom: 270px;
+    left: 285px;
+    }
+  #flInput{display:none;}
+  .inputFile label{
+    cursor:pointer;
+    background:#36c;
+    border-radius:3px;
+    padding:10px 10px;
+    color:#fff;
+    font-weight:bold;
+    text-align: center;
+    }
+  .inputFile label:hover{
+      background:#fc0;
+    }
   

@@ -1,5 +1,7 @@
 .container{
+padding-left: 30px;
 max-width: 1200px;
+min-height: 700px;
 display: grid;
 grid-template-areas: 
 "header header"

@@ -1,5 +1,20 @@
 const SEND_NEW_MESSAGES = "dialogs/SEND-NEW-MESSAGES";
-const initialState = {
+
+type MessagesType = {
+  id: number
+  messages: string
+}
+type DialogsType = {
+  id: number
+  name: string
+  img: string
+}
+
+type InitialStateType ={
+messages: Array<MessagesType>
+dialogs: Array<DialogsType>
+}
+const initialState: InitialStateType = {
   messages: [
     { id: 1, messages: "React" },
     { id: 2, messages: "YO" },
@@ -29,7 +44,7 @@ const initialState = {
 }
 
 
-export const dialogsReduser = (state = initialState, action) => {
+export const dialogsReduser = (state = initialState, action: any): InitialStateType => {
 
   switch(action.type) {
     case SEND_NEW_MESSAGES: 
@@ -42,6 +57,10 @@ export const dialogsReduser = (state = initialState, action) => {
   }
 };
 
-
-export const sendNewMessages = (newMessagesBody) => ({ type: SEND_NEW_MESSAGES, newMessagesBody });
+type SendNewMessagesActionType = {
+  type: typeof SEND_NEW_MESSAGES
+  newMessagesBody: string
+}
+export const sendNewMessages = (newMessagesBody: string):SendNewMessagesActionType =>
+    ({ type: SEND_NEW_MESSAGES, newMessagesBody });
 export default dialogsReduser;

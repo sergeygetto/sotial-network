@@ -2,11 +2,15 @@
   "name": "my",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://sergeygetto.github.io/sotial-network/",
+  "homepage": "https://network-ebeeb.web.app/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.5",
     "@testing-library/react": "^11.1.1",
     "@testing-library/user-event": "^12.2.0",
+    "@types/jest": "^26.0.20",
+    "@types/node": "^14.14.31",
+    "@types/react": "^17.0.2",
+    "@types/react-dom": "^17.0.1",
     "axios": "^0.21.0",
     "formik": "^2.2.6",
     "react": "^17.0.1",
@@ -16,6 +20,7 @@
     "redux": "^4.0.5",
     "redux-form": "^8.3.7",
     "redux-thunk": "^2.3.0",
+    "typescript": "^ 4.0.5",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
@@ -45,6 +50,7 @@
     ]
   },
   "devDependencies": {
+    "@types/redux-form": "^8.3.1",
     "gh-pages": "^3.1.0"
   }
 }

@@ -2,7 +2,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Main from './Main'
-import { userProfileThunkCreator, updateUserStatusThunkCreator, getUserStatusThunkCreator, savePhotosThunkCreator, profileDescriptionThunkCreator } from './../../redux/main-reduser'
+import { userProfileThunkCreator, updateUserStatusThunkCreator, getUserStatusThunkCreator, savePhotosThunkCreator, profileDescriptionThunkCreator } from '../../redux/main-reduser'
 import { withRouter } from 'react-router-dom'
 import { withAuthRedirect } from '../../hoc/WithAuthRedirect'
 import { compose } from 'redux'
