@@ -1,6 +1,7 @@
 
 import {authUserThunkCreator} from './auth-reduser'
 
+
 const USER_INITIALIZATION = "auth/USER_INITIALIZATION";
 
 
@@ -10,7 +11,7 @@ initialization: false,
 
     }
 
-export const appReduser = (state = initialState, action) => {
+export const appReduser = (state = initialState, action: any) => {
   switch (action.type) {
     case USER_INITIALIZATION:
     return {
@@ -27,7 +28,7 @@ export const appReduser = (state = initialState, action) => {
 export const initializationUser = () => ({ type: USER_INITIALIZATION});
 
 export const initializationUserThunkCreator = () => {
-  return (dispatch) => {
+  return (dispatch: any) => {
       let promise = dispatch(authUserThunkCreator())
       Promise.all([promise]) 
       .then( () => {
