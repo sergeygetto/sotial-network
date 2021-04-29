@@ -7,16 +7,31 @@ import { Field, reduxForm } from 'redux-form'
 import { Textarea } from "../common/FormsControls/FormsControls";
 import { maxFieldLengthCreator, requiredFieldValidationForm } from "../../utilits/validation";
 
-const Dialogs = (props) => {
+type PropsType = {
+  dialogs: Array<string>
+  messages: Array<string>
+  id: number
+  name: string
+  img: string
+}
+type MessagesType = {
+  sendNewMessages: ()=> void
+}
+const Dialogs = (props: PropsType) => {
   let dialogsItem = props.dialogs.map((elem) => (
+    //@ts-ignore
     <DialogElem key={elem.id} name={elem.name} id={elem.id} img={elem.img} />
   ));
 
   let messagesItem = props.messages.map((elem) => (
+    //@ts-ignore
     <MessagesElem key={elem.id} messages={elem.messages} />
   ));
+    //@ts-ignore
 
   const onSubmitAddMessages = (values) =>{
+    //@ts-ignore
+
     props.sendNewMessages(values.newMessagesBody) 
   }
 
@@ -35,8 +50,13 @@ const Dialogs = (props) => {
     </>
   );
 };
+
+type PropsFormType = {
+  handleSubmit: any
+}
+
 let maxLength50 = maxFieldLengthCreator(50)
-const MessagesForm = (props) => {
+const MessagesForm = (props: PropsFormType) => {
   return (
 <form onSubmit={props.handleSubmit}>  
             <div>  

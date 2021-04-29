@@ -1,3 +1,4 @@
+import { Action } from 'redux';
 const SEND_NEW_MESSAGES = "dialogs/SEND-NEW-MESSAGES";
 
 type MessagesType = {
@@ -43,8 +44,8 @@ const initialState: InitialStateType = {
    
 }
 
-
-export const dialogsReduser = (state = initialState, action: any): InitialStateType => {
+type ActionsTypes = SendNewMessagesActionType
+export const dialogsReduser = (state = initialState, action: ActionsTypes): InitialStateType => {
 
   switch(action.type) {
     case SEND_NEW_MESSAGES: 

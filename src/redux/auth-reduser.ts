@@ -1,5 +1,8 @@
- import { stopSubmit } from 'redux-form';
+import { Dispatch } from 'redux';
+import { stopSubmit } from 'redux-form';
+import { ThunkAction } from 'redux-thunk';
 import { captchaUrlSecurity, getHeader , login , logout } from '../api/api';
+import { AppStateType } from './redux-store';
 
 
 const AUTH_USERS_DATA = "auth/AUTH-USERS-COMPONENT";
@@ -21,7 +24,9 @@ isAuth: false,
 captchaUrl: null
     }
 
-export const authReduser = (state = initialState, action: any): InitialStateType => {
+
+type ActionType = AuthUsersDataActionType | SetCaptchaUrlType 
+export const authReduser = (state = initialState, action: ActionType): InitialStateType => {
   switch (action.type) {
     case AUTH_USERS_DATA:
     return {
@@ -63,8 +68,11 @@ type SetCaptchaUrlType = {
 export const setCaptchaUrl = (captchaUrl: string): SetCaptchaUrlType =>
     ({ type: SET_CAPTCHA_URL, data: {captchaUrl}});
 
+type DispatchType = Dispatch<ActionType>
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionType>
+
 export const authUserThunkCreator = () => {
-  return async(dispatch: any) => {
+  return async(dispatch: DispatchType) => {
     let response = await getHeader()
       if(response.data.resultCode === 0){
         let {id , email , login } = response.data.data
@@ -72,8 +80,8 @@ export const authUserThunkCreator = () => {
     }
   }
 }  
-export const loginThunkCreator = (email: string , password: string, rememberMe: boolean, captcha: string ) => {
-  return async(dispatch: any) => {
+export const loginThunkCreator = (email: string , password: string, rememberMe: boolean, captcha: string ):ThunkType => {
+  return async(dispatch) => {
     let response = await login(email , password, rememberMe, captcha)
       if(response.data.resultCode === 0){
       dispatch(authUserThunkCreator())
@@ -82,12 +90,13 @@ export const loginThunkCreator = (email: string , password: string, rememberMe: 
           dispatch(captchaUrlThunkCreator())
         }
       let messages = response.data.messages.length > 0 ? response.data.messages[0] : "Some error" 
-        dispatch(stopSubmit('login', {_error: messages}))
+      //@ts-ignore  
+      dispatch(stopSubmit('login', {_error: messages}))
     }
   }
 }
 export const captchaUrlThunkCreator = () => {
-  return async(dispatch: any) => {
+  return async(dispatch: DispatchType) => {
   let response = await captchaUrlSecurity();
   const captchaUrl = response.data.url
       dispatch(setCaptchaUrl(captchaUrl))
@@ -96,7 +105,7 @@ export const captchaUrlThunkCreator = () => {
 }
 
 export const logoutThunkCreator = () => {
-  return async(dispatch: any) => {
+  return async(dispatch: DispatchType) => {
   let response = await logout()
       if(response.data.resultCode === 0){
       dispatch(authUsersData (null, null , null, false ))

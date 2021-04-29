@@ -1,5 +1,8 @@
 
+import { Dispatch } from 'redux';
+import { ThunkAction } from 'redux-thunk';
 import {authUserThunkCreator} from './auth-reduser'
+import { AppStateType } from './redux-store';
 
 
 const USER_INITIALIZATION = "auth/USER_INITIALIZATION";
@@ -12,8 +15,8 @@ const initialState: InitialStateType = {
 initialization: false
 }
 
-
-export const appReduser = (state = initialState, action: any):InitialStateType => {
+type ActionsTypes = InitializationUserActionType
+export const appReduser = (state = initialState, action: ActionsTypes):InitialStateType => {
   switch (action.type) {
     case USER_INITIALIZATION:
     return {
@@ -32,9 +35,10 @@ type InitializationUserActionType = {
 export const initializationUser = (): InitializationUserActionType =>  ({ type : USER_INITIALIZATION});
 
 
+type ThunkType = ThunkAction<Promise<void>, AppStateType ,unknown, ActionsTypes >
 
 export const initializationUserThunkCreator = () => {
-  return (dispatch: any) => {
+  return (dispatch: Dispatch<ActionsTypes|any>) => {
       let promise = dispatch(authUserThunkCreator())
       Promise.all([promise]) 
       .then( () => {

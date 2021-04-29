@@ -4,9 +4,13 @@ import el from'./Header.module.css'
 import { NavLink } from 'react-router-dom'
 
 
+type PropsType = {
+  logoutThunkCreator: ()=> void
+  isAuth: boolean
+  email: string
+}
 
-
-const Header =(props) =>{
+const Header =(props: PropsType) =>{
 const logoutAuth = () => {
   props.logoutThunkCreator()
 }

@@ -3,11 +3,26 @@ import el from './Users.module.css'
 import userImg from './../../assets/images/avatar.jpg'
 import { NavLink } from 'react-router-dom';
 import Paginator from '../common/Paginator/Paginator';
+import { UsersType } from '../../types/Types';
 
-const User = (props) =>{
+type PropsType = {
+    totalPage: number
+    pageSize: number
+    currentPage: number
+    onPageChanged: (p: number)=> void
+    users: Array<UsersType>
+    followingProgress: Array<number>
+    unFollowThunkCreator: (id: number)=> void
+    followThunkCreator: (id: number)=> void
+    // id: any
+}
+
+const User: React.FC<PropsType> = (props) =>{
     
-return ( <>
+return ( 
+     <div>
 <Paginator totalPage={props.totalPage} pageSize={props.pageSize} currentPage={props.currentPage} onPageChanged={props.onPageChanged} />
+
 
  {
      props.users.map(user => <div className={el.container}>
@@ -43,7 +58,7 @@ return ( <>
      )
  }
 
-</>)
+</div> )
 }
 
 export default User

@@ -3,7 +3,7 @@ import loading from '../../../assets/images/Double Ring.svg'
 
 
 
-const Loading = (props) =>{
+const Loading = () =>{
   return( <div> 
      <img style={{margin: '50px 400px'}} src={loading}/>
      </div>

@@ -2,8 +2,13 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import el from './../Dialogs.module.css'
 
+type PropsType = {
+    img: string
+    id: number
+    name: string
+}
 
-const DialogElem = (props) =>{
+const DialogElem = (props: PropsType) =>{
 // let newRefs = React.createRef();
 // let newAlert =() =>{
 // alert( newRefs.current.value)    

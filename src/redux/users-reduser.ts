@@ -1,6 +1,13 @@
+// import { Dispatch } from 'react';
+// import { UsersType } from './../types/Types';
+import { AppStateType } from './redux-store';
+import { Dispatch } from 'redux';
 import { getUserPage } from '../api/api'
 import { getUserPageChange , getUnfollow, getFollow} from '../api/api'
 import {PhotosType, UsersType} from "../types/Types";
+import { ThunkAction } from 'redux-thunk';
+// import { ThunkDispatch } from 'redux-thunk';
+// import { DispatchProp } from 'react-redux';
 
 
 const FOLLOW = "users/FOLLOW";
@@ -19,10 +26,12 @@ pageSize: 100,
 totalPage: 0,
 currentPage: 1,
 isFetching: false,
-followingProgress: [] as Array <number>,
+followingProgress: [] as Array <number>, // id users
     }
 
-export const usersReduser = (state = initialState, action: any): InitialStateType => {
+type ActionsTypes = FollowType | UnFollowType | SetUsersType | SetCurrentType | SetUsersTotalCountType | ToggleIsFetchingType | ToggleIsFollowingProgressType
+
+export const usersReduser = (state = initialState, action: ActionsTypes): InitialStateType => {
   switch (action.type) {
     case FOLLOW:
     return {
@@ -47,7 +56,8 @@ export const usersReduser = (state = initialState, action: any): InitialStateTyp
     }
     case SET_USERS:
       return{
-        ...state, users: action.users
+        
+        ...state, users : action.users
       }
     case SET_CURRENT_USERS:
       return{
@@ -86,9 +96,9 @@ export const unFollow = (usersID: number): UnFollowType => ({ type: UN_FOLLOW, u
 
 type SetUsersType = {
     type: typeof SET_USERS
-    users: UsersType
+    users: Array<UsersType>
 }
-export const setUsers = (users: UsersType): SetUsersType => ({ type: SET_USERS , users });
+export const setUsers = (users:Array<UsersType>): SetUsersType => ({ type: SET_USERS , users });
 
 type SetCurrentType = {
     type: typeof SET_CURRENT_USERS
@@ -108,15 +118,22 @@ type ToggleIsFetchingType = {
 }
 export const toggleIsFetching = (isFetching: boolean) => ({ type: TOGGLE_IS_FETCHING , isFetching });
 
-type ToggleIsFollowingProgress = {
+type ToggleIsFollowingProgressType = {
     type: typeof TOGGLE_IS_FOLLOWING_PROGRESS
     isFetching: boolean
     userID: number
 }
 export const toggleIsFollowingProgress = (isFetching: boolean, userID: number) => ({ type: TOGGLE_IS_FOLLOWING_PROGRESS , isFetching , userID });
 
-export const getUsersThunkCreator = (currentPage: any , pageSize: any , p: any ) => {
-return async(dispatch: any) => {
+
+type DispatchType =  Dispatch<ActionsTypes>
+type StateType = () => AppStateType
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>
+
+
+
+export const getUsersThunkCreator = (currentPage: number , pageSize: number) => {
+return async(dispatch: Dispatch) => {
   dispatch(toggleIsFetching(true))
   let data = await getUserPage(currentPage , pageSize)
     dispatch(toggleIsFetching(false)) 
@@ -124,7 +141,7 @@ return async(dispatch: any) => {
     dispatch(setUsersTotalCount(data.totalCount))
     dispatch(setCurrent(currentPage))       
 }}
- const  followUnfollowFlow = async(userId: number, dispatch: any ,apiMethod: any, creator: any) => {
+ const  followUnfollowFlow = async(userId: number, dispatch:Dispatch ,apiMethod: any, creator: any) => {
   dispatch(toggleIsFollowingProgress(true, userId))
                   let data = await apiMethod(`${userId}`)
                   if(data.resultCode === 0) {
@@ -133,15 +150,15 @@ return async(dispatch: any) => {
                      dispatch(toggleIsFollowingProgress(false, userId))
 }
 
-export const unFollowThunkCreator = (userId:number) => {
-  return async(dispatch: any) => {
+export const unFollowThunkCreator = (userId:number):ThunkType => {
+  return async(dispatch) => {
     let apiMethod = getUnfollow;
     let creator = unFollow;
     followUnfollowFlow(userId, dispatch ,apiMethod, creator)
   } 
 }
-export const followThunkCreator = (userId:number) => {
-  return  async(dispatch: any) => {
+export const followThunkCreator = (userId:number):ThunkType => {
+  return  async(dispatch) => {
     let apiMethod = getFollow;
     let creator = follow
     followUnfollowFlow(userId, dispatch ,apiMethod, creator)   

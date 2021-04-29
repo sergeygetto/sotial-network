@@ -4,21 +4,27 @@ import { withAuthRedirect } from "../../hoc/WithAuthRedirect";
 import {
   sendNewMessages
 } from "../../redux/dialogs-reduser";
+import { AppStateType } from "../../redux/redux-store";
 import Dialogs from "./Dialogs";
 
-const mapStateToProps = (state)  => {
+type MapDispatchType = {
+  sendNewMessages: (newMessagesBody: string)=> void
+}
+
+const mapStateToProps = (state: AppStateType)  => {
   return {
     dialogs : state.dialogsPage.dialogs,
     messages : state.dialogsPage.messages,
-    initialMessagesText : state.dialogsPage.initialMessagesText,
+    // initialMessagesText : state.dialogsPage.initialMessagesText
     
   }
 }
+//@ts-ignore
 const mapDispatchToProps = (dispatch) => {
 
   return {
   
-    sendNewMessages : (newMessagesBody) => dispatch(sendNewMessages(newMessagesBody))
+    sendNewMessages : (newMessagesBody: string) => dispatch(sendNewMessages(newMessagesBody))
 
   }
 }

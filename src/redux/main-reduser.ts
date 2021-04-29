@@ -1,6 +1,8 @@
 import { getMainProfile , getUsersStatus , updateUsersStatus, savePhotosSuccess, profileUpdateDescription} from '../api/api'
 import { stopSubmit } from 'redux-form';
 import {PhotosType, PostsType, ProfileType} from "../types/Types";
+import { ThunkAction } from 'redux-thunk';
+import { AppStateType } from './redux-store';
 
 
 const NEW_POST = "main/NEW-POST";
@@ -25,7 +27,8 @@ const initialState: InitialStateType = {
     }
     // type InitialState = typeof initialState
 
-export const mainReduser = (state = initialState, action:any):InitialStateType => {
+  type ActionsTypes = NewPOSTType | SetUsersProfileType | SetUsersStatusType | SavePhotosFileType
+export const mainReduser = (state = initialState, action: ActionsTypes):InitialStateType => {
   switch (action.type) {
     case NEW_POST:
     return {
@@ -67,9 +70,9 @@ export const setUsersProfile = (profile: ProfileType): SetUsersProfileType => ({
 
 type SetUsersStatusType = {
    type: typeof SET_USERS_STATUS
-    status: string
+    status: string | any 
 }
-export const setUsersStatus = (status: string): SetUsersStatusType => ({ type: SET_USERS_STATUS, status });
+export const setUsersStatus = (status: string ): SetUsersStatusType => ({ type: SET_USERS_STATUS, status });
 
 type SavePhotosFileType = {
    type: typeof SAVE_PHOTOS
@@ -77,23 +80,24 @@ type SavePhotosFileType = {
 }
 export const savePhotosFile = (photos: PhotosType): SavePhotosFileType => ({ type: SAVE_PHOTOS, photos });
 
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>
 
-export const userProfileThunkCreator = (userID: number) => {
-  return async(dispatch: any) => {
-        let u = `${userID}`
-       let data = await getMainProfile(u)
+export const userProfileThunkCreator = (userID: number):ThunkType => {
+  return async(dispatch) => {
+        // let u = `${userID}`
+       let data = await getMainProfile(userID)
           dispatch(setUsersProfile(data))
   }
 } 
-export const getUserStatusThunkCreator = (userID: number) => {
-  return async(dispatch: any) => {
+export const getUserStatusThunkCreator = (userID: number):ThunkType => {
+  return async(dispatch) => {
     let data = await getUsersStatus(userID)
             dispatch(setUsersStatus(data.data))
   }
 } 
 
-export const updateUserStatusThunkCreator = (status: string) => {
-  return async(dispatch: any) => {
+export const updateUserStatusThunkCreator = (status: string):ThunkType => {
+  return async(dispatch) => {
     try{
     let data = await updateUsersStatus(status)
           if(data.data.resultCode === 0){
@@ -103,22 +107,23 @@ export const updateUserStatusThunkCreator = (status: string) => {
   }
 }
 } 
-export const savePhotosThunkCreator = (photos: any) => {
-  return async(dispatch: any) => {
+export const savePhotosThunkCreator = (photos: any):ThunkType => {
+  return async(dispatch) => {
     let data = await savePhotosSuccess(photos)
           if(data.data.resultCode === 0){
             dispatch(savePhotosFile(data.data.data.photos))}
   }
 } 
-export const profileDescriptionThunkCreator = (profile: ProfileType ) => {
-  return async(dispatch:any, getState:any) => {
-    const userID = getState().auth.id 
+export const profileDescriptionThunkCreator = (profile: ProfileType  ):ThunkType => {
+  return async(dispatch, getState) => {
+    let userID: number | any = getState().auth.id 
     let data = await profileUpdateDescription(profile)
           if(data.data.resultCode === 0){
             dispatch(userProfileThunkCreator(userID))}
             else{ 
                // let messages = data.data.messages.length > 0 ? data.data.messages[0] : "Some error" 
-                  dispatch(stopSubmit('profile', {_error:  data.data.messages[0]}))
+               //@ts-ignore   
+               dispatch(stopSubmit('profile', {_error:  data.data.messages[0]}))
                 return Promise.reject(data.data.messages[0])
             }
   }
